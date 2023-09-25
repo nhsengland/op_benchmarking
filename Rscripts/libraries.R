@@ -1,0 +1,16 @@
+if(!require("pacman")) install.packages("pacman")
+pacman::p_load(tidyverse,
+               rmarkdown,
+               knitr,
+               tinytex,
+               kableExtra,
+               writexl,
+               stringr,
+               formattable,
+               odbc,
+               ggplot2,
+               writexl,
+               jsonlite,
+               flexdashboard,
+               DT,
+               plotly)
