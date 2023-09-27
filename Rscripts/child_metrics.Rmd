@@ -1,0 +1,116 @@
+`r paste0('# ', met, ' {data-navmenu="metric views"}')`
+
+## Column {data-width="1000"}
+
+### `r paste0(met,' benchmarking comparison')`
+
+**Proof of concept prototype - all values are randomly generated**
+```{r metric table}
+
+table_red <- "#F08080"
+table_amber <- '#D1B05F'
+table_green <-  "#90EE90" 
+
+brks_metrics <- quantile(metric_data[2:19], probs = seq(.05, .95, .05), na.rm = TRUE)
+blu_clrs_metrics <- round(seq(255, 40, length.out = length(brks_metrics) + 1), 0) %>%
+  {paste0("rgb(",.,",",.,",255)")}
+rd_clrs_metrics <- round(seq(255, 40, length.out = length(brks_metrics) + 1), 0) %>%
+  {paste0("rgb(255,", ., ",", ., ")")}
+
+if (met == 'SA per 100 OPFA'){
+datatable(metric_data,
+          class = 'cell-border stripe',
+          rownames = FALSE,
+          options = list(pageLength = nrow(df),
+                         paging = FALSE,
+                         dom = 'ti')) %>% 
+    formatStyle(names(metric_data),
+                backgroundColor = styleInterval(c(16,20),c(table_red,table_amber,table_green))
+                )} else if (met == 'SA Diversion Rate'){
+datatable(metric_data,
+          class = 'cell-border stripe',
+          rownames = FALSE,
+          options = list(pageLength = nrow(df),
+                         paging = FALSE,
+                         dom = 'ti')) %>% 
+    formatStyle(
+      names(metric_data),
+      backgroundColor = styleInterval(brks_metrics, blu_clrs_metrics)
+    )} else if (met == 'Average Wait to OPFA'){
+datatable(metric_data,
+          class = 'cell-border stripe',
+          rownames = FALSE,
+          options = list(pageLength = nrow(df),
+                         paging = FALSE,
+                         dom = 'ti')) %>%
+    formatRound(c(2:19),1) %>%     
+    formatStyle(
+      names(metric_data),
+      backgroundColor = styleInterval(brks_metrics, blu_clrs_metrics)
+    )} else if (met == 'Discharge after OPFA'){
+datatable(metric_data,
+          class = 'cell-border stripe',
+          rownames = FALSE,
+          options = list(pageLength = nrow(df),
+                         paging = FALSE,
+                         dom = 'ti')) %>% 
+    formatStyle(
+      names(metric_data),
+      backgroundColor = styleInterval(brks_metrics, blu_clrs_metrics)
+    )} else if (met == 'New:FU ratio'){
+datatable(metric_data,
+          class = 'cell-border stripe',
+          rownames = FALSE,
+          options = list(pageLength = nrow(df),
+                         paging = FALSE,
+                         dom = 'ti')) %>% 
+    formatRound(c(2:19),1) %>%  
+    formatStyle(
+      names(metric_data),
+      backgroundColor = styleInterval(brks_metrics, blu_clrs_metrics)
+    )} else if (met == 'Moved or Discharged to PIFU'){
+datatable(metric_data,
+          class = 'cell-border stripe',
+          rownames = FALSE,
+          options = list(pageLength = nrow(df),
+                         paging = FALSE,
+                         dom = 'ti')) %>% 
+    formatPercentage(c(2:19),1) %>% 
+    formatStyle(names(metric_data),
+                backgroundColor = styleInterval(c(0.045,0.05),c(table_red,table_amber,table_green))
+                )} else if (met == 'Missed Appointments'){
+datatable(metric_data,
+          class = 'cell-border stripe',
+          rownames = FALSE,
+          options = list(pageLength = nrow(df),
+                         paging = FALSE,
+                         dom = 'ti')) %>% 
+    formatPercentage(c(2:19),1) %>% 
+    formatStyle(
+      names(metric_data),
+      backgroundColor = styleInterval(brks_metrics, rd_clrs_metrics)
+    )} else if (met == 'OPFU Reduction') {
+datatable(metric_data,
+          class = 'cell-border stripe',
+          rownames = FALSE,
+          options = list(pageLength = nrow(df),
+                         paging = FALSE,
+                         dom = 'ti')) %>% 
+    formatPercentage(c(2:19),1) %>% 
+    formatStyle(names(metric_data),
+    backgroundColor = styleInterval(c(-0.26,0.00),c(table_green,table_amber,table_red))   
+    )} else if (met == 'RTT Pathway Validation') {
+      datatable(metric_data,
+          class = 'cell-border stripe',
+          rownames = FALSE,
+          options = list(pageLength = nrow(df),
+                         paging = FALSE,
+                         dom = 'ti')) %>% 
+    formatPercentage(c(2:19),1) %>% 
+    formatStyle(
+      names(metric_data),
+      backgroundColor = styleInterval(brks_metrics, blu_clrs_metrics)
+    )}
+    
+
+```

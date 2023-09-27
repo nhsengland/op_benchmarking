@@ -1,0 +1,99 @@
+---
+title: "DRAFT Outpatient benchmarking overview"
+output: 
+  flexdashboard::flex_dashboard:
+    vertical_layout: fill
+---
+
+```{css}
+.value-box {
+  height: 25%;
+}
+
+.chart-title {
+    font-size: 18px;
+}
+
+```
+
+```{r, setup, include= FALSE }
+
+## create the data frames
+
+## currently using faked data so what we pull in will change when using live sources
+## but the flow should remain the same
+source('Rscripts\\mock_up.R')
+```
+
+```{r, local colours, include= FALSE }
+
+table_red <- "#F08080"
+table_amber <- '#D1B05F'
+table_green <-  "#90EE90" 
+  
+```
+
+
+# Cover {data-orientation="rows"}
+
+## Row {data-height="100"}
+
+### Purpose of this document
+
+The purpose of this document is to give systems and providers in the South East access to benchmarking information related to key outpatient recovery and transformation workstreams. 
+
+**This document is a prototype created for comment and feedback. All of the values provided are randomly generated and bear no relation to the trust's actual performance**
+
+## Row {data-height="500"}
+
+### Methodology
+
+Placeholder metrics to be defined here
+
+```{r, create-subpages, include = FALSE}
+metric_env <- new.env()
+spec_env <- new.env()
+out = NULL
+
+options(knitr.duplicate.label = 'allow')
+
+for (met in metric) {
+  met <- met
+  
+metric_data  <- all_metrics %>% 
+  filter(metric_name == met) %>% 
+  select(speciality,
+         system,
+         provider,
+         value) %>% 
+  pivot_wider(names_from = c(system,provider),
+              values_from = value)
+assign("met",met,metric_env)  
+assign("metric_data",metric_data,metric_env)
+
+out = c(out, knitr::knit_child('RScripts\\child_metrics.Rmd',envir = metric_env))  
+  
+}
+
+for (spec in specialities) {
+spec <- spec
+spec_data <- all_metrics %>% 
+  filter(speciality == spec) %>% 
+  select(system,
+         provider,
+         metric_name,
+         value) %>% 
+  pivot_wider(names_from = metric_name,
+              values_from = value)
+
+assign("spec",spec,spec_env)
+assign("spec_data",spec_data,spec_env)
+
+
+out = c(out, knitr::knit_child('RScripts\\child_specs.Rmd',envir = spec_env))
+
+}
+
+```
+
+`r paste(knitr::knit_child(text = out), collapse = '')`
