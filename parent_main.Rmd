@@ -59,14 +59,14 @@ options(knitr.duplicate.label = 'allow')
 
 for (met in metric) {
   met <- met
-  
+
 metric_data  <- all_metrics %>% 
   filter(metric_name == met) %>% 
   select(speciality,
          system,
          provider,
          value) %>% 
-  pivot_wider(names_from = c(system,provider),
+  pivot_wider(names_from = c(speciality),
               values_from = value)
 assign("met",met,metric_env)  
 assign("metric_data",metric_data,metric_env)
