@@ -7,10 +7,6 @@
 **Proof of concept prototype - all values are randomly generated**
 ```{r metric table}
 
-table_red <- "#F08080"
-table_amber <- '#D1B05F'
-table_green <-  "#90EE90" 
-
 brks_metrics <- quantile(metric_data[3:15], probs = seq(.05, .95, .05), na.rm = TRUE)
 blu_clrs_metrics <- round(seq(255, 40, length.out = length(brks_metrics) + 1), 0) %>%
   {paste0("rgb(",.,",",.,",255)")}
@@ -54,6 +50,7 @@ datatable(metric_data,
           options = list(pageLength = nrow(df),
                          paging = FALSE,
                          dom = 'ti')) %>% 
+    formatPercentage(c(3:15),1) %>% 
     formatStyle(
       names(metric_data),
       backgroundColor = styleInterval(brks_metrics, blu_clrs_metrics)

@@ -7,10 +7,6 @@
 **Proof of concept prototype - all values are randomly generated**
 ```{r speciality table}
 
-table_red <- "#F08080"
-table_amber <- '#D1B05F'
-table_green <-  "#90EE90" 
-
 brks_4 <- quantile(spec_data$`SA Diversion Rate`, probs = seq(.05, .95, .05), na.rm = TRUE)
 brks_5 <- quantile(spec_data$`Average Wait to OPFA`, probs = seq(.05, .95, .05), na.rm = TRUE)
 brks_6 <- quantile(spec_data$`Discharge after OPFA`, probs = seq(.05, .95, .05), na.rm = TRUE)
@@ -41,7 +37,7 @@ datatable(spec_data,
                          dom = 'ti')
 ) %>% 
   formatRound(c(5,7),1) %>% 
-  formatPercentage(c(8,9,10,11),1) %>% 
+  formatPercentage(c(6,8,9,10,11),1) %>% 
   formatStyle(
     'SA per 100 OPFA',
     backgroundColor = styleInterval(c(16,20),c(table_red,table_amber,table_green))
