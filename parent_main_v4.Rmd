@@ -1,5 +1,5 @@
 ---
-title: "DRAFT Outpatient benchmarking overview"
+title: "Outpatient benchmarking overview"
 output: 
   flexdashboard::flex_dashboard:
     vertical_layout: fill
@@ -25,7 +25,10 @@ output:
 source('Rscripts\\reshaping_data_v3.R')
 
 metric <- as.list(unique(all_metrics$metric_name))
-speciality_names <- as.list(unique(all_metrics$speciality))
+speciality_names <- all_metrics %>% 
+  select(Treatment_Function_Code,speciality) %>% 
+  arrange(Treatment_Function_Code) 
+speciality_names <- as.list(unique(speciality_names$speciality))
 
 ```
 
@@ -151,8 +154,6 @@ Mean time in weeks between the referral request received date and the appointmen
   
 The metric is set to a gradient scale from white (lowest value) to a bright blue (highest value)
 
-## Column {data-width="333"}
-
 **Discharge after OPFA: Percentage of patients discharged after a first outpatient appointment**
 
 Numerator:\
@@ -166,6 +167,8 @@ Denominator:\
   Administrative category code: 01
   
 The metric is set to a gradient scale from white (lowest value) to a bright blue (highest value)
+
+## Column {data-width="333"}
 
 **New:FU ratio: Outpatient new to follow-up ratio**
 
@@ -203,8 +206,6 @@ Values equal to or below 4.5% show as a red background with white text,
 Values equal to or above 5% show as a green background with black text,
 Values greater than 4.5% and below 5% show as a yellow background with black text
 
-## Column {data-width="333"}
-
 **Percentage of Missed appointments**
 
 Numerator:\
@@ -218,6 +219,8 @@ Denominator:\
   Administrative category code: 01
 
 The metric is set to a gradient scale from white (lowest value) to red (highest value)
+
+## Column {data-width="333"}
 
 **Outpatient follow-up reduction compared to 19/20 baseline**
 
@@ -283,7 +286,7 @@ metric_data  <- all_metrics %>%
 assign("met",met,metric_env)  
 assign("metric_data",metric_data,metric_env)
 
-out = c(out, knitr::knit_child('RScripts\\child_metrics_v3.Rmd',envir = metric_env))  
+out = c(out, knitr::knit_child('RScripts\\child_metrics_v4.Rmd',envir = metric_env))  
   
 }
 
@@ -315,7 +318,7 @@ assign("spec",spec,spec_env)
 assign("spec_data",spec_data,spec_env)
 
 
-out = c(out, knitr::knit_child('RScripts\\child_specs_v3.Rmd',envir = spec_env))
+out = c(out, knitr::knit_child('RScripts\\child_specs_v4.Rmd',envir = spec_env))
 
 }
 

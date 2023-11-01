@@ -27,6 +27,11 @@ as.datatable(formattable(
   rownames = FALSE,
   options = list(pageLength = nrow(df),
                  paging = FALSE,
-                 dom = 'ti')) 
+                 dom = 'ti',
+                 columnDefs = list(
+                   list(
+                     targets = 2:ncol(spec_data)-1,
+                     type = 'html-num-fmt')))
+  ) 
 
 ```
