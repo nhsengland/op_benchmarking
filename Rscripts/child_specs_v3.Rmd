@@ -1,0 +1,32 @@
+`r paste0('# ', spec, ' {data-navmenu="specialities"}')`
+
+## Column {data-width="1000"}
+
+### `r paste0('Outpatient benchmarking metrics - ',spec)`
+
+
+```{r speciality table}
+
+
+as.datatable(formattable(
+  spec_data,
+  list(
+    area(col = c(3,4,7))  ~ function(x) digits(x,digits = 1),
+    area(col = c(6,8,9,10,11)) ~ function(x) percent(x, digits = 1),
+    'SA per 100 OPFA' = RAG_styler_up_good(red_threshold = 15, green_threshold = 21),
+    'SA Diversion Rate' = color_tile_ralign("transparent",NHS_bright_blue),
+    'Mean weeks to first' = color_tile_ralign("transparent",NHS_bright_blue),
+    'Discharge after OPFA' = color_tile_ralign("transparent",NHS_bright_blue),
+    'New FU Ratio' = color_tile_ralign("transparent",NHS_bright_blue),
+    'Moved Discharged PIFU' = RAG_styler_up_good(red_threshold = 0.045, green_threshold = 0.05),
+    'Missed Appointments' = color_tile_ralign("transparent",soft_red),
+    'validated last 12 weeks' = color_tile_ralign("transparent",NHS_bright_blue),
+    'OPFU Reduction' = RAG_styler_up_bad(red_threshold = 1, green_threshold = 0.75)
+  )),
+  class = 'cell-border stripe',
+  rownames = FALSE,
+  options = list(pageLength = nrow(df),
+                 paging = FALSE,
+                 dom = 'ti')) 
+
+```

@@ -1,0 +1,84 @@
+`r paste0('# ', met, ' {data-navmenu="metric views"}')`
+
+## Column {data-width="1000"}
+
+### `r paste0(met,' benchmarking comparison')`
+
+
+```{r metric table}
+
+if (met == 'SA per 100 OPFA'){
+as.datatable(formattable(
+  metric_data,
+  digits = 1,
+  list(
+    area(col = 3:ncol(metric_data)) ~ RAG_styler_up_good(red_threshold = 15, green_threshold = 21)
+  )),
+  class = 'cell-border stripe',
+  rownames = FALSE,
+  options = list(pageLength = nrow(df),
+                 paging = FALSE,
+                 dom = 'ti')
+)} else if (met == 'OPFU Reduction') {
+as.datatable(formattable(
+  metric_data,
+  list(
+    area(col = 3:ncol(metric_data)) ~ function(x) percent(x, digits = 1),
+    area(col = 3:ncol(metric_data)) ~ RAG_styler_up_bad(red_threshold = 1, green_threshold = 0.75)
+  )),
+  class = 'cell-border stripe',
+  rownames = FALSE,
+  options = list(pageLength = nrow(df),
+                 paging = FALSE,
+                 dom = 'ti')
+    )} else if (met == 'Moved Discharged PIFU'){
+red_threshold = 0.045
+green_threshold = 0.05
+as.datatable(formattable(
+  metric_data,
+  list(
+    area(col = 3:ncol(metric_data)) ~ function(x) percent(x, digits = 1),
+    area(col = 3:ncol(metric_data)) ~ RAG_styler_up_good(red_threshold = 0.045, green_threshold = 0.05)
+  )),
+  class = 'cell-border stripe',
+  rownames = FALSE,
+  options = list(pageLength = nrow(df),
+                 paging = FALSE,
+                 dom = 'ti')   
+    )} else if (met == 'Missed Appointments'){
+ as.datatable(formattable(
+            metric_data,
+            list(
+              area(col = 3:ncol(metric_data)) ~ function(x) percent(x, digits = 1),
+              area(col = 3:ncol(metric_data)) ~ color_tile_ralign("transparent",soft_red)
+              )),
+            class = 'cell-border stripe',
+            rownames = FALSE,
+            options = list(pageLength = nrow(metric_data),
+                           paging = FALSE,
+                           dom = 'ti') 
+    )} else if (met %in% c('Discharge after OPFA','validated last 12 weeks')){
+ as.datatable(formattable(
+            metric_data,
+            list(
+              area(col = 3:ncol(metric_data)) ~ function(x) percent(x, digits = 1),
+              area(col = 3:ncol(metric_data)) ~ color_tile_ralign("transparent",NHS_bright_blue)
+              )),
+            class = 'cell-border stripe',
+            rownames = FALSE,
+            options = list(pageLength = nrow(metric_data),
+                           paging = FALSE,
+                           dom = 'ti')
+    )} else {
+ as.datatable(formattable(
+            metric_data,
+            digits = 2,                
+            list(
+              area(col = 3:ncol(metric_data)) ~ color_tile_ralign("transparent",NHS_bright_blue)
+              )),
+            class = 'cell-border stripe',
+            rownames = FALSE,
+            options = list(pageLength = nrow(metric_data),
+                           paging = FALSE,
+                           dom = 'ti'))} 
+```

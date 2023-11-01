@@ -1,0 +1,324 @@
+---
+title: "DRAFT Outpatient benchmarking overview"
+output: 
+  flexdashboard::flex_dashboard:
+    vertical_layout: fill
+---
+
+```{css}
+.value-box {
+  height: 25%;
+}
+
+.chart-title {
+    font-size: 18px;
+}
+
+```
+
+```{r, setup, include= FALSE }
+
+## create the data frames
+
+## currently using faked data so what we pull in will change when using live sources
+## but the flow should remain the same
+source('Rscripts\\reshaping_data_v3.R')
+
+metric <- as.list(unique(all_metrics$metric_name))
+speciality_names <- as.list(unique(all_metrics$speciality))
+
+```
+
+# Cover {data-orientation="columns"}
+
+## Column {data-width="300"}
+
+### Purpose of this document
+
+The purpose of this document is to give systems and providers in the South East access to benchmarking information related to key outpatient recovery and transformation workstreams.
+
+For trend information and further investigation the reader is advised to review the [Model Hospital](https://model.nhs.uk/home) outpatient compartment for all metrics except mean time to first appointment which is not included in Model Hospital due to known data quality issues, and waiting list validation which can be accessed via [RAIDR](https://nwl.raidr.nhs.uk/)
+
+All metrics in this dashboard reflect the latest SUS or EROC reported position for the month commencing 01-08-2023 apart from waiting list validation data which is from the WLMDS submission for the week ending 15-10-2023
+
+The specialities presented in this dashboard have had their names shortened to allow for easier presentation, the full names and aligned treatment function codes are as follows:
+
+- General Surgery: General Surgery (TFC 100)
+- Urology: Urology Service (TFC 101)
+- T&O: 	Trauma and Orthopaedic Service (TFC 110)
+- ENT: 	Ear Nose and Throat Service (TFC 120)
+- Ophthalm:	Ophthalmology Service (TFC 130)
+- Gastro: Gastroenterology Service (TFC 301)
+- Endo: Endocrinology Service (TFC 302)
+- Haem: Clinical Haematology Service (TFC 303)
+- Cardio: Cardiology Service (TFC 320)
+- Derm: Dermatology Service (TFC 330)
+- Resp: Respiratory Medicine Service (TFC 340)
+- Neuro: Neurology Service (TFC 400)
+- Rheum: Rheumatology Service (TFC 410)
+- Gynae: Gynaecology Service (TFC 502)
+- Paeds: a combined value for the following paediatric treatment function codes
+'142','171','211','212','213','214','215','216','217','218','219','220',												'221','222','223','230','240','241','242','250','251','252','253','254',												'255','256','257','258','259','260','261','262','263','264','270','280',
+'290','291','321','421'
+- Total: All treatment function codes against which the provider has reported activity to SUS for that period, apart from diagnostics (812), Exception applies for outpatient follow up reduction, see separate metric definition on the methodology page
+
+## Column {data-width="400"}
+
+### System and provider acronyms
+
+Acronyms and shortened names used within this document to represent systems and providers are:
+
+[System names:]{.underline}
+
+-   BOB - NHS Buckinghamshire, Oxfordshire and Berkshire West ICB
+-   Frimley - NHS Frimley ICB
+-   HIOW - NHS Hampshire and Isle of Wight ICB
+-   KM - NHS Kent and Medway ICB
+-   Surrey - NHS Surrey Heartlands ICB
+-   Sussex - NHS Sussex ICB
+
+[Provider names:]{.underline}
+
+-   ASP - Ashford and St Peter's Hospitals NHS Foundation Trust
+-   BHT - Buckinghamshire Healthcare NHS Trust
+-   DGT - Dartford and Gravesham NHS Trust
+-   EKH - East Kent Hospitals University NHS Foundation Trust
+-   ESH - East Sussex Healthcare NHS Trust
+-   Frimley - Frimley Health NHS Foundation Trust
+-   HHFT - Hampshire Hospitals NHS Foundation Trust
+-   IOW - Isle of Wight NHS Trust
+-   MFT - Medway NHS Foundation Trust
+-   MTW - Maidstone and Tunbridge Wells NHS Trust
+-   OUH - Oxford University Hospitals NHS Foundation Trust
+-   PHU - Portsmouth Hospitals University National Health Service Trust
+-   QVH - Queen Victoria Hospital NHS Foundation Trust
+-   RBH - Royal Berkshire NHS Foundation Trust
+-   RSCH - Royal Surrey County Hospital NHS Foundation Trust
+-   SASH - Surrey and Sussex Healthcare NHS Trust
+-   UHS - University Hospital Southampton NHS Foundation Trust
+-   UHSX - University Hospitals Sussex NHS Foundation Trust
+
+## Column {data-width="300"}
+
+### Other acronyms used in this report
+
+-   SA: Specialist advice
+-   OPFA: Outpatient First Attendance
+-   New: Outpatient First Attendance
+-   OPFU: Outpatient Follow-up Attendance
+-   FU: Outpatient Follow-up Attendance
+-   RTT: Referral To Treatment
+-   HRG: Healthcare Resource Group
+-   EROC: Elective Recovery Outpatient Collection
+
+# Methodology {data-orientation="columns"}
+
+
+
+## Column {data-width="334"}
+
+**SA per 100 OPFA: Specialist advice per 100 outpatient first attendances**
+
+Numerator:
+  Sum of all System EROC Processed Requests within the reporting period
+
+Denominator:
+  Sum of all Outpatient attendances in line with above criteria, for the same reporting period as the numerator
+  
+Values equal to or below 15 show as a red background with white text,
+Values equal to or above 21 show as a green background with black text,
+Values greater than 15 and below 21 show as a yellow background with black text
+
+**SA Diversion Rate: Specialist advice diversion rate per 100 requests**
+
+Numerator:
+  Sum of all processed requests where the outcome is:
+  'Return to referrer with advice no onward referral or booking' or
+  'Return to referrer with advice other'
+
+Denominator:
+  Sum of all System EROC Reported Requests (All Requests from all sources) within the reporting period
+  
+The metric is set to a gradient scale from white (lowest value) to a bright blue (highest value)
+
+**Average Wait to OPFA: Average wait to first outpatient attendance (weeks)**
+
+Mean time in weeks between the referral request received date and the appointment date as reported on SUS for all routine outpatient first attendances for NHS funded care (ie excluding urgent and two week wait appointments)
+
+  First Attendance codes: 1 and 3\
+  Attendance status codes: 5 and 6\
+  Administrative category code: 01 Priority code: 1
+  
+The metric is set to a gradient scale from white (lowest value) to a bright blue (highest value)
+
+## Column {data-width="333"}
+
+**Discharge after OPFA: Percentage of patients discharged after a first outpatient appointment**
+
+Numerator:\
+    Sum of all OPFA, excluding diagnostic appointments (treatment function code: 812) where no procedure took place (activity grouped to an HRG in the WF subchapter) and the outcome of the attendance was recorded as a discharge (Outcome of attendance code: 1)
+
+Denominator:\
+    Sum of all OPFA, excluding diagnostic appointments (treatment function code: 812) where no procedure took place (activity grouped to an HRG in the WF subchapter)
+
+  First Attendance codes: 1 and 3\
+  Attendance status codes: 5 and 6\
+  Administrative category code: 01
+  
+The metric is set to a gradient scale from white (lowest value) to a bright blue (highest value)
+
+**New:FU ratio: Outpatient new to follow-up ratio**
+
+The average number of follow up appointments per 1 first outpatient appointment.\
+
+Numerator:\
+  Sum of all attended OPFU, excluding diagnostic appointments (treatment function code: 812)
+
+  First Attendance codes: 2 and 4\
+  Attendance status codes: 5 and 6\
+  Administrative category code: 01
+
+Denominator:\
+  Sum of all attended OPFA, excluding diagnostic appointments (treatment function code: 812)
+
+  First Attendance codes: 1 and 3\
+  Attendance status codes: 5 and 6\
+  Administrative category code: 01
+
+The metric is set to a gradient scale from white (lowest value) to a bright blue (highest value)
+
+**Percentage of patients moved or discharged to PIFU**
+
+Numerator:\
+  Sum of all PIFU pathways moved or discharged within the reporting period as reported in Provider EROC
+
+Denominator:\
+    Sum of all attended outpatient appointments (new and follow-up), excluding those classified an RTT clock stop administration event (First Attendance code = 5)
+
+  First Attendance codes: 1, 2, 3 and 4\
+  Attendance status codes: 5 and 6\
+  Administrative category code: 01
+
+Values equal to or below 4.5% show as a red background with white text,
+Values equal to or above 5% show as a green background with black text,
+Values greater than 4.5% and below 5% show as a yellow background with black text
+
+## Column {data-width="333"}
+
+**Percentage of Missed appointments**
+
+Numerator:\
+  Sum of all outpatient appointments where the attendance status code indicates that the patient either did not attend with no advanced warning given, or the patient arrived late and could not be seen (attendance status codes 3 and 7)
+  
+Denominator:\
+      Sum of all outpatient appointments (new and follow-up), excluding those classified an RTT clock stop administration event (First Attendance code = 5)
+
+  First Attendance codes: 1, 2, 3 and 4\
+  Attendance status codes: 3, 5, 6 and 7\
+  Administrative category code: 01
+
+The metric is set to a gradient scale from white (lowest value) to red (highest value)
+
+**Outpatient follow-up reduction compared to 19/20 baseline**
+
+Definition taken from Model Hospital outpatient compartment methodology
+
+This is the percentage difference in volume of follow up outpatient attendances between 2019/20 baseline month and current activity level.   
+
+Numerator:\
+Outpatient follow up activity without a procedure / working days in month 2022-23 
+
+Denominator:\
+2019/20 Outpatient follow up activity without a procedure / working day in month 2019-20   
+
+The outpatient follow up activity data here includes activity that does not attract a procedure tariff. Due to the impact of covid-19, the baseline for March 2020 is based on the average activity for February & March in the previous 3 years (i.e 2017 - 2019). Where the total activity is reported, some treatment function codes are excluded from this metric, in line with the Elective recovery technical guidance.
+
+Values equal to or above 100% show as a red background with white text,
+Values equal to or below 75% show as a green background with black text,
+Values greater than 75% and below 100% show as a yellow background with black text
+
+**Percentage of open RTT pathways validated in last 12 weeks**
+
+RTT Pathways Validation Status (utilising the LAST_PAS_VALIDATION_DATE field) shown by calculated waiting time cohorts as at specific dates. Those pathways with no PAS validation date are counted as 'Not Validated'. 
+
+Excluded totally from the report are:
+Pathways assigned to the IRTT (inpatient referral to treatment) waiting list, 
+Pathways which have a current RTT wait of less than, or equal to, 12 weeks
+AND
+(Pathways where the Date_Last_Attended is within the last 12 weeks OR Decision To Admit Within the last 12 Weeks (Admitted or Non-Admitted) 
+OR
+Pathways which have a TCI Date OR Future Outpatient Appointment date in the next 4 weeks)
+
+Numerator:\
+All patients open to the non-admitted referral to treatment waiting list where in addition to the above exclusions the patient has a recorded PAS validation date from within the last 12 weeks
+
+Denominator:\
+All patients open to the non-admitted referral to treatment waiting list after the above exclusions have been applied where any of the following is true:
+- The patient has a recorded PAS validation date from within the last 12 weeks
+- The patient has a recorded PAS validation date that took place over 12 weeks ago
+- No PAS validation date has been recorded
+
+The metric is set to a gradient scale from white (lowest value) to a bright blue (highest value)
+
+```{r, create-subpages, include = FALSE}
+metric_env <- new.env()
+spec_env <- new.env()
+out = NULL
+
+options(knitr.duplicate.label = 'allow')
+
+for (met in metric) {
+  met <- met
+
+metric_data  <- all_metrics %>% 
+  filter(metric_name == met) %>% 
+  arrange(provider,
+          Treatment_Function_Code) %>% 
+  select(speciality,
+         system,
+         provider,
+         value) %>% 
+  pivot_wider(names_from = c(speciality),
+              values_from = value)
+assign("met",met,metric_env)  
+assign("metric_data",metric_data,metric_env)
+
+out = c(out, knitr::knit_child('RScripts\\child_metrics_v3.Rmd',envir = metric_env))  
+  
+}
+
+for (spec in speciality_names) {
+spec <- spec
+spec_data <- all_metrics %>% 
+    arrange(provider,
+          Treatment_Function_Code) %>% 
+  filter(speciality == spec) %>% 
+  select(system,
+         provider,
+         metric_name,
+         value) %>% 
+  pivot_wider(names_from = metric_name,
+              values_from = value) %>% 
+  select(system,
+         provider,
+         'SA per 100 OPFA',
+         'SA Diversion Rate',
+         'Mean weeks to first',
+         'Discharge after OPFA',
+         'New FU Ratio',
+         'Moved Discharged PIFU',
+         'Missed Appointments',
+         'validated last 12 weeks',
+         'OPFU Reduction')
+
+assign("spec",spec,spec_env)
+assign("spec_data",spec_data,spec_env)
+
+
+out = c(out, knitr::knit_child('RScripts\\child_specs_v3.Rmd',envir = spec_env))
+
+}
+
+```
+
+`r paste(knitr::knit_child(text = out), collapse = '')`

@@ -16,3 +16,4 @@ pacman::p_load(tidyverse,
                plotly,
                htmltools)
 
+cat("package load complete")
