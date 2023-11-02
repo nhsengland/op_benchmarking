@@ -7,8 +7,8 @@ calculate_metric <- function(data, metric1, metric2, new_name, multiplier = 1) {
              Der_Provider_Code, 
              Treatment_Function_Code) %>%
     mutate(!!sym(new_name) := (!!sym(metric1) / !!sym(metric2))*multiplier) %>%
-    select(!c(metric1, metric2)) %>%
-    pivot_longer(cols = new_name,
+    select(!any_of(c(metric1, metric2))) %>%
+    pivot_longer(cols = all_of(new_name),
                  names_to = 'Metric_Name',
                  values_to = 'Metric_Value')
   return(result)
