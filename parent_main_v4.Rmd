@@ -113,6 +113,7 @@ Acronyms and shortened names used within this document to represent systems and 
 -   RTT: Referral To Treatment
 -   HRG: Healthcare Resource Group
 -   EROC: Elective Recovery Outpatient Collection
+-   PIFU: Patient Initiated Follow-Up
 
 # Methodology {data-orientation="columns"}
 
