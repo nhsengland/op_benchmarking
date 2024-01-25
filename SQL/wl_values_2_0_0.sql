@@ -36,7 +36,7 @@ SELECT
 	,Last_PAS_Validation_Date
 
 
-FROM [Reporting].[MESH_WLMDS_Open_ASI_Combined] AS WL																								
+FROM [Reporting_MESH_WLMDS].[Open_ASI_Combined] AS WL																								
 	LEFT OUTER Join [Reporting_UKHD_ODS].[Provider_Hierarchies] AS Ref on organisation_identifier_code_of_provider = Ref.Organisation_Code																																															
 	Left outer Join [Internal_RTT].[RTT_TFC_Mappings] AS TFC on cast([ACTIVITY_TREATMENT_FUNCTION_CODE] as varchar) = cast([National_TFC_code] as varchar)	
 
@@ -45,7 +45,7 @@ WHERE
 	AND Referral_To_Treatment_Period_End_Date IS NULL																		
 	AND Ref.Region_Code = 'Y59'																		
 	AND Waiting_List_Type in ('ORTT')																		
-	And DerWeekEnding = (SELECT MAX(DerWeekEnding) FROM [Reporting].[MESH_WLMDS_Open_ASI_Combined])																		
+	And DerWeekEnding = (SELECT MAX(DerWeekEnding) FROM [Reporting_MESH_WLMDS].[Open_ASI_Combined])																		
 	AND organisation_identifier_code_of_provider in ('RPC','RHM','RWF','RYR','RTH','RHW','RXQ','RXC','RTP','RPA','RN5','RHU','RN7','R1F','RVV','RDU','RTK','RA2')
 	)
 

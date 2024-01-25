@@ -1,9 +1,9 @@
 
 DECLARE @report_period AS Varchar(6)
-SET @report_period = '202308'
+SET @report_period = '202309'
 
 Declare @reporting_month AS DATE
-SET @reporting_month = '2023-08-01'
+SET @reporting_month = '2023-09-01'
 
 DECLARE @index_value AS varchar(7)
 SET @index_value = '2023/24'

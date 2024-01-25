@@ -42,7 +42,7 @@ The purpose of this document is to give systems and providers in the South East 
 
 For trend information and further investigation the reader is advised to review the [Model Hospital](https://model.nhs.uk/home) outpatient compartment for all metrics except mean time to first appointment which is not included in Model Hospital due to known data quality issues, and waiting list validation which can be accessed via [RAIDR](https://nwl.raidr.nhs.uk/)
 
-All metrics in this dashboard reflect the latest SUS or EROC reported position for the month commencing 01-08-2023 apart from waiting list validation data which is from the WLMDS submission for the week ending 15-10-2023
+All metrics in this dashboard reflect the latest SUS or EROC reported position for the month commencing 01-11-2023 apart from waiting list validation data which is from the WLMDS submission for the week ending 31-12-2023
 
 The specialities presented in this dashboard have had their names shortened to allow for easier presentation, the full names and aligned treatment function codes are as follows:
 
