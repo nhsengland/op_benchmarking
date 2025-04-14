@@ -26,12 +26,12 @@ as.datatable(formattable(
   class = 'cell-border stripe',
   rownames = FALSE,
   options = table_options
-)} else if (met == 'OPFU Reduction') {
+)} else if (met == 'Outpatient Capacity Use') {
 as.datatable(formattable(
   metric_data,
   list(
     area(col = 3:ncol(metric_data)) ~ function(x) percent(x, digits = 1),
-    area(col = 3:ncol(metric_data)) ~ RAG_styler_up_bad(red_threshold = 1, green_threshold = 0.75)
+    area(col = 3:ncol(metric_data)) ~ RAG_styler_up_good(red_threshold = 0.40, green_threshold = 0.46)
   )),
   class = 'cell-border stripe',
   rownames = FALSE,
@@ -46,8 +46,18 @@ as.datatable(formattable(
   class = 'cell-border stripe',
   rownames = FALSE,
   options = table_options
+#  )} else if (met == 'Daycase Ratio'){
+#    as.datatable(formattable(
+#      metric_data,
+#      list(
+#        area(col = 3:ncol(metric_data)) ~ function(x) percent(x, digits = 1),
+#        area(col = 3:ncol(metric_data)) ~ RAG_styler_up_good(red_threshold = 0.8, green_threshold = 0.85)
+#        )),
+#      class = 'cell-border stripe',
+#      rownames = FALSE,
+#      options = table_options
     )} else if (met == 'Missed Appointments'){
- as.datatable(formattable(
+as.datatable(formattable(
             metric_data,
             list(
               area(col = 3:ncol(metric_data)) ~ function(x) percent(x, digits = 1),

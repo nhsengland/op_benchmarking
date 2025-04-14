@@ -8,9 +8,11 @@ SELECT
 	,CASE WHEN [ACTIVITY_TREATMENT_FUNCTION_CODE] IN ('142','171','211','212','213','214','215','216','217','218','219','220',
 													'221','222','223','230','240','241','242','250','251','252','253','254',
 													'255','256','257','258','259','260','261','262','263','264','270','280',
-													'290','291','321','421') THEN 'Paeds'
-			ELSE [ACTIVITY_TREATMENT_FUNCTION_CODE]
-			END AS [Treatment_Function_Code]
+													'290','291','321','420','421') THEN 'Paeds'
+		WHEN [ACTIVITY_TREATMENT_FUNCTION_CODE] IN ('110','111','115') THEN 'T&O'
+		WHEN [ACTIVITY_TREATMENT_FUNCTION_CODE] IN ('100','102','104','105','106') THEN 'General Surgery'
+		ELSE [ACTIVITY_TREATMENT_FUNCTION_CODE]
+		END AS [Treatment_Function_Code]
 	,CASE
 		WHEN [TCI_Date] BETWEEN [derWeekEnding] AND  DATEADD(WEEK,4,[derWeekEnding]) THEN 1
 		WHEN [Outpatient_Future_Appointment_Date] BETWEEN [derWeekEnding] AND  DATEADD(WEEK,4,[derWeekEnding]) THEN 1

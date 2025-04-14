@@ -7,7 +7,7 @@ source('Rscripts\\data_import.R')
 
 #Creating a list of the specialities people are interested in
 
-specialities <- as.list(c('100','101','110','120','130','301','302','303','320',
+specialities <- as.list(c('General Surgery','101','T&O','120','130','301','302','303','320',
                           '330','340','400','410','502','Paeds','Total'))
 
 #limiting the data to just that list
@@ -54,8 +54,16 @@ all_metrics <- rbind(all_metrics,
 
 all_metrics <- rbind(all_metrics,
                      trimmed_data %>% 
-                       filter(Metric_Name == 'OPFU_Reduction') %>% 
-                       mutate(Metric_Name = 'OPFU Reduction'))
+                       calculate_metric('ERF_NOT_FUP','ERF_Total','Outpatient Capacity Use'))
+
+#all_metrics <- rbind(all_metrics,
+#                     trimmed_data %>% 
+#                       calculate_metric('Daycases','Total_Elective','Daycase Ratio'))
+
+#all_metrics <- rbind(all_metrics,
+#                     trimmed_data %>% 
+#                       filter(Metric_Name == 'OPFU_Reduction') %>% 
+#                       mutate(Metric_Name = 'OPFU Reduction'))
 
 all_metrics <- all_metrics %>% 
   ungroup()

@@ -10,8 +10,6 @@ rm(base_data_noRTT,
    base_data_RTT)
 
 
-
-
 tfc_list <- read_csv("lookups/tfc_list.csv", 
                      col_types = cols(tfc = col_character()))
 
