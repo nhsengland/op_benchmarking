@@ -51,10 +51,9 @@ is not included in Model Hospital due to known data quality issues, and
 waiting list validation which can be accessed via
 [RAIDR](https://nwl.raidr.nhs.uk/)
 
-All metrics in this dashboard reflect the latest SUS or EROC reported
-position for the month commencing 01-12-2024 apart from waiting list
-validation data which is from the WLMDS submission for the week ending
-16-03-2025
+All metrics in this dashboard reflect the latest SUS and PIFU reported
+positions for the month commencing 01-08-2025, System EROC reported position for month commencing
+01-08-2025.
 
 The specialities presented in this dashboard have had their names
 shortened to allow for easier presentation, the full names and aligned
@@ -187,72 +186,72 @@ Administrative category code: 01 Priority code: 1
 The metric is set to a gradient scale from white (lowest value) to a
 bright blue (highest value)
 
-**Outpatient Capacity Use**
+#**Outpatient Capacity Use**
 
-This is an [indicative]{.underline} figure intended to provide an
-indication of the outpatient capacity use position. This figure is being
-made available several months prior to the official calculation and so
-is likely to be inaccurate. Current estimates are that the variance
-between indicative reporting and the official figure may be as large as
-+/- 3% for the overall figure for the trust.
+#This is an [indicative]{.underline} figure intended to provide an
+#indication of the outpatient capacity use position. This figure is being
+#made available several months prior to the official calculation and so
+#is likely to be inaccurate. Current estimates are that the variance
+#between indicative reporting and the official figure may be as large as
+#+/- 3% for the overall figure for the trust.
 
-Official reporting is not being made available at the treatment function
-level so variance between the indicative and final figures have not been
-calculated but caution is strongly advised.
+#Official reporting is not being made available at the treatment function
+#level so variance between the indicative and final figures have not been
+#calculated but caution is strongly advised.
 
-Numerator: All outpatient appointments - with an appointment date in
-that month, - which has been recorded as attended, - which are first
-outpatient appointments, or which group to a HRG with a price as
-contained in the 2023/24 national tariff publication (those with 0 as a
-price are excluded). Activity of HRGs that do not have an OPROC unit
-price and are priced as OP attendance are included , - treatment
-function code is NOT one of 501, 560, 700, 710, 711, 712, 713, 715, 720,
-721, 722, 723, 724, 725, 726, 727, 199, 499, - zero priced and unbundled
-activity is excluded, - activity for subchapter NZ (maternity) is
-exclude, - both ICB and non-ICB commissioned activity is within scope, -
-activity for private patients, overseas visitors and devolved
-administrations is excluded.
-
-Denominator: all outpatient appointments - with an appointment date in
-that month, - which has been recorded as attended, - treatment function
-code is NOT one of 501, 560, 700, 710, 711, 712, 713, 715, 720, 721,
-722, 723, 724, 725, 726, 727, 199, 499, - appointments allocated based
-on the ICB for the registered GP of the patient, - zero priced and
-unbundled activity is excluded, - activity for subchapter NZ (maternity)
-is excluded, - both ICB and non-ICB commissioned activity is within
-scope, - activity for private patients, overseas visitors and devolved
-administrations is excluded. This is based on a field derived from the
-Commissioner Assignment Method (CAM):
-Responsible_Purchaser_Assignment_Method.
-
-Values equal to or below 40% show as a red background with white text,
-Values equal to or above 46% show as a green background with black text,
-Values greater than 4% and below 46% show as a yellow background with
-black text
-
-## Column {data-width="333"}
-
-**Discharge after OPFA: Percentage of patients discharged after a first
-outpatient appointment**
-
-Numerator:\
-Sum of all OPFA, excluding diagnostic appointments (treatment function
-code: 812) where no procedure took place (activity grouped to an HRG in
-the WF subchapter) and the outcome of the attendance was recorded as a
-discharge (Outcome of attendance code: 1)
-
-Denominator:\
-Sum of all OPFA, excluding diagnostic appointments (treatment function
-code: 812) where no procedure took place (activity grouped to an HRG in
-the WF subchapter)
-
-First Attendance codes: 1 and 3\
-Attendance status codes: 5 and 6\
-Administrative category code: 01
-
-The metric is set to a gradient scale from white (lowest value) to a
-bright blue (highest value)
-
+#Numerator: All outpatient appointments - with an appointment date in
+#that month, - which has been recorded as attended, - which are first
+#outpatient appointments, or which group to a HRG with a price as
+#contained in the 2023/24 national tariff publication (those with 0 as a
+#price are excluded). Activity of HRGs that do not have an OPROC unit
+#price and are priced as OP attendance are included , - treatment
+#function code is NOT one of 501, 560, 700, 710, 711, 712, 713, 715, 720,
+#721, 722, 723, 724, 725, 726, 727, 199, 499, - zero priced and unbundled
+#activity is excluded, - activity for subchapter NZ (maternity) is
+#exclude, - both ICB and non-ICB commissioned activity is within scope, -
+#activity for private patients, overseas visitors and devolved
+#administrations is excluded.
+#
+#Denominator: all outpatient appointments - with an appointment date in
+#that month, - which has been recorded as attended, - treatment function
+#code is NOT one of 501, 560, 700, 710, 711, 712, 713, 715, 720, 721,
+#722, 723, 724, 725, 726, 727, 199, 499, - appointments allocated based
+#on the ICB for the registered GP of the patient, - zero priced and
+#unbundled activity is excluded, - activity for subchapter NZ (maternity)
+#is excluded, - both ICB and non-ICB commissioned activity is within
+#scope, - activity for private patients, overseas visitors and devolved
+#administrations is excluded. This is based on a field derived from the
+#Commissioner Assignment Method (CAM):
+#Responsible_Purchaser_Assignment_Method.
+#
+#Values equal to or below 40% show as a red background with white text,
+#Values equal to or above 46% show as a green background with black text,
+#Values greater than 4% and below 46% show as a yellow background with
+#black text
+#
+### Column {data-width="333"}
+#
+#**Discharge after OPFA: Percentage of patients discharged after a first
+#outpatient appointment**
+#
+#Numerator:\
+#Sum of all OPFA, excluding diagnostic appointments (treatment function
+#code: 812) where no procedure took place (activity grouped to an HRG in
+#the WF subchapter) and the outcome of the attendance was recorded as a
+#discharge (Outcome of attendance code: 1)
+#
+#Denominator:\
+#Sum of all OPFA, excluding diagnostic appointments (treatment function
+#code: 812) where no procedure took place (activity grouped to an HRG in
+#the WF subchapter)
+#
+#First Attendance codes: 1 and 3\
+#Attendance status codes: 5 and 6\
+#Administrative category code: 01
+#
+#The metric is set to a gradient scale from white (lowest value) to a
+#bright blue (highest value)
+#
 **New:FU ratio: Outpatient new to follow-up ratio**
 
 The average number of follow up appointments per 1 first outpatient
@@ -392,13 +391,13 @@ spec_data <- all_metrics %>%
          provider,
          'SA per 100 OPFA',
          'SA Diversion Rate',
-         'Outpatient Capacity Use',
-         'Mean weeks to first',
-         'Discharge after OPFA',
+         #'Outpatient Capacity Use',
+         #'Mean weeks to first',
+        # 'Discharge after OPFA',
          'New FU Ratio',
          'Moved Discharged PIFU',
-         'Missed Appointments',
-         'validated last 12 weeks')#,
+         'Missed Appointments')#,
+         #'validated last 12 weeks')#,
          #'Daycase Ratio')
 
 assign("spec",spec,spec_env)

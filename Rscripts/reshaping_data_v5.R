@@ -27,14 +27,14 @@ all_metrics <- rbind(all_metrics,
                        calculate_metric('SA_Diversions','SA_Total','SA Diversion Rate',100))
 
 ## step 3: repeat until complete 
-all_metrics <- rbind(all_metrics,
-                     trimmed_data %>% 
-                       filter(Metric_Name == 'Mean_weeks_to_first') %>% 
-                       mutate(Metric_Name = 'Mean weeks to first'))
+#all_metrics <- rbind(all_metrics,
+#                     trimmed_data %>% 
+#                      filter(Metric_Name == 'Mean_weeks_to_first') %>% 
+#                      mutate(Metric_Name = 'Mean weeks to first'))
 
-all_metrics <- rbind(all_metrics,
-                     trimmed_data %>% 
-                       calculate_metric('OPFA_noProc_disch','OPFA_noProc','Discharge after OPFA'))
+#all_metrics <- rbind(all_metrics,
+#                     trimmed_data %>% 
+#                       calculate_metric('OPFA_noProc_disch','OPFA_noProc','Discharge after OPFA'))
 
 all_metrics <- rbind(all_metrics,
                      trimmed_data %>% 
@@ -48,13 +48,13 @@ all_metrics <- rbind(all_metrics,
                      trimmed_data %>% 
                        calculate_metric('DNA_Count','OP_All_Inc_DNA','Missed Appointments'))
 
-all_metrics <- rbind(all_metrics,
-                     trimmed_data %>% 
-                       calculate_metric('validated_pathways','validation_cohort','validated last 12 weeks'))
+#all_metrics <- rbind(all_metrics,
+#                     trimmed_data %>% 
+#                       calculate_metric('validated_pathways','validation_cohort','validated last 12 weeks'))
 
-all_metrics <- rbind(all_metrics,
-                     trimmed_data %>% 
-                       calculate_metric('ERF_NOT_FUP','ERF_Total','Outpatient Capacity Use'))
+#all_metrics <- rbind(all_metrics,
+#                     trimmed_data %>% 
+#                       calculate_metric('ERF_NOT_FUP','ERF_Total','Outpatient Capacity Use'))
 
 #all_metrics <- rbind(all_metrics,
 #                     trimmed_data %>% 

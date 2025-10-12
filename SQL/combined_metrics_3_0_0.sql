@@ -18,9 +18,31 @@ set @reporting_month = (SELECT
 					AND REF.NHSE_Organisation_Type IN ('NHS Trust', 'Acute Trust')
 					AND REF.Effective_To IS NULL )
 
+
+declare @reporting_month_pifu as date
+set @reporting_month_pifu = (SELECT
+				MAX(erc.Activity_month)
+				FROM 
+	[NHSE_Reference].[dbo].[tbl_Ref_Provider_EROC] AS ERC  
+	LEFT OUTER JOIN [NHSE_Reference].[dbo].[tbl_Ref_ODS_Provider_Hierarchies] AS REF 
+		ON (CASE
+				WHEN RIGHT(ERC.[Provider_code],2) = '00' THEN LEFT([Provider_code],3) 			
+				WHEN LEFT(ERC.[Provider_code],3) = 'RXH' THEN 'RYR'
+				WHEN LEFT(ERC.[Provider_code],3) = 'RD7' THEN 'RDU'
+				ELSE LEFT(ERC.[Provider_code],3) END) = REF.Organisation_Code
+WHERE 
+	[Latest_data] = 'yes'  	
+	AND [Metric_name] = 'Moved or Discharged'
+	AND REF.Region_Code = 'Y59'	
+	AND REF.NHSE_Organisation_Type IN ('NHS Trust', 'Acute Trust')
+	AND REF.Effective_To IS NULL)
+
 DECLARE @report_period as varchar(6)
-set @report_period  = (SELECT Concat(CAST(year(@reporting_month) as varchar),CASE WHEN len(CAST(month(@reporting_month) as varchar)) = 1 then concat(0,CAST(month(@reporting_month) as varchar))
-								else CAST(month(@reporting_month) as varchar) END))
+set @report_period  = '202502'
+
+
+--(SELECT Concat(CAST(year(@reporting_month) as varchar),CASE WHEN len(CAST(month(@reporting_month) as varchar)) = 1 then concat(0,CAST(month(@reporting_month) as varchar))
+--								else CAST(month(@reporting_month) as varchar) END))
 
 IF OBJECT_ID('NHSE_Sandbox_South.dbo.OP_Benchmarking_Staging_1', 'U') IS NOT NULL 
   DROP TABLE NHSE_Sandbox_South.dbo.OP_Benchmarking_Staging_1; 
@@ -149,7 +171,7 @@ FROM
 
 WHERE 
 	[Latest_data] = 'yes'  
-	AND Activity_month = @reporting_month
+	AND Activity_month = @reporting_month_pifu
 	AND [Metric_name] = 'Moved or Discharged'
 	AND REF.Region_Code = 'Y59'	
 	AND REF.NHSE_Organisation_Type IN ('NHS Trust', 'Acute Trust')
